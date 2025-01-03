@@ -1,0 +1,497 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    position: relative;
+    gap: 1rem;
+}
+
+.logo img {
+    height: 50px;
+    min-width: 50px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    -ms-overflow-style: none;  /* Pour IE et Edge */
+    scrollbar-width: none;     /* Pour Firefox */
+    padding: 0 1rem;
+    flex: 1;                   /* Prend tout l'espace disponible */
+    margin: 0 2rem;            /* Espace entre le logo et les liens */
+    position: relative;
+    z-index: 1;
+    gap: 0.3rem;
+}
+
+/* Masquer la barre de défilement pour Chrome/Safari */
+.nav-links::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 0.5rem 0.7rem;
+    transition: color 0.3s ease;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-links a i {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.cart {
+    margin-left: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 11;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 2%;
+    }
+    
+    .nav-links {
+        margin: 0 1rem;
+    }
+    
+    .nav-links a {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .nav-links a i {
+        font-size: 0.85rem;
+    }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 480px) {
+    .logo img {
+        height: 40px;
+        min-width: 40px;
+    }
+    
+    .nav-links {
+        margin: 0 0.5rem;
+    }
+}
+
+/* Style commun pour les boutons de navigation */
+.nav-more {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    justify-content: center;
+    z-index: 10;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Bouton précédent */
+.nav-prev {
+    left: 10px;
+    background: white;
+}
+
+/* Bouton suivant */
+.nav-next {
+    right: 10px;
+    background: white;
+}
+
+.nav-more i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    opacity: 1;
+}
+
+.nav-prev:hover i {
+    transform: translateX(-3px);
+}
+
+.nav-next:hover i {
+    transform: translateX(3px);
+}
+
+/* Animation subtile au survol */
+.nav-more::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-more:hover::before {
+    opacity: 1;
+}
+
+/* Afficher les boutons quand le menu déborde */
+.nav-links.has-overflow ~ .nav-more {
+    display: flex !important;
+}
+
+/* Ajuster les marges des liens quand les boutons sont visibles */
+.nav-links.has-overflow {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+/* Ajuster la position du logo */
+.logo {
+    position: relative;
+    z-index: 11;
+    margin-right: 1rem;
+}
+
+/* Styles pour le dropdown */
+.dropdown {
+    position: relative;
+    margin-right: 1rem;
+    z-index: 12;
+}
+
+.dropbtn {
+    background-color: #2B4B5C;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.dropbtn i {
+    transition: transform 0.3s ease;
+}
+
+.dropbtn i.fa-chevron-down::before {
+    content: "\f0c9"; /* Code de l'icône hamburger */
+}
+
+.dropbtn.active {
+    background-color: #1a3541;
+}
+
+/* Style du menu déroulant pleine largeur */
+.dropdown-content {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 120px; /* Ajuster selon la hauteur de votre header */
+    background-color: white;
+    padding: 2rem 5%;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Grille pour les liens du menu */
+.dropdown-content {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Style des liens avec images */
+.dropdown-content a {
+    color: #2B4B5C;
+    padding: 1.2rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Style des images de catégorie */
+.category-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Effet hover sur les liens */
+.dropdown-content a:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+}
+
+.dropdown-content a:hover .category-image {
+    border-color: #2B4B5C;
+    transform: scale(1.1);
+}
+
+.dropdown-content a:hover .category-image img {
+    transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Overlay pour le fond sombre */
+.dropdown-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+/* État actif du menu */
+.dropdown.active .dropdown-content {
+    display: grid;
+    animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.dropdown.active .dropdown-overlay {
+    display: block;
+    opacity: 1;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .dropdown-content {
+        top: 100px;
+        padding: 1rem;
+        grid-template-columns: 1fr;
+    }
+
+    .dropdown-content a {
+        padding: 1rem;
+        font-size: 0.9rem;
+        gap: 1rem;
+    }
+
+    .category-image {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Style de la barre supérieure */
+.top-bar {
+    background-color: #f8f8f8;
+    padding: 0.8rem 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Style du logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    min-width: 50px;
+    object-fit: contain;
+}
+
+/* Style de la barre de recherche */
+.search-container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.search-box i {
+    color: #2B4B5C;
+    margin-right: 0.8rem;
+    font-size: 1rem;
+}
+
+.search-box input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    color: #333;
+}
+
+.search-box input::placeholder {
+    color: #666;
+}
+
+/* Media queries pour le responsive */
+@media (max-width: 1024px) {
+    .search-container {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 0.6rem 2%;
+        gap: 1rem;
+    }
+    
+    .logo img {
+        height: 40px;
+        min-width: 40px;
+    }
+    
+    .search-container {
+        max-width: none;
+    }
+    
+    .search-box {
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .search-box input {
+        font-size: 0.85rem;
+    }
+}
+
+/* Ajuster la position sticky du menu principal */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Style pour les boutons Mon compte et Panier */
+.account-cart {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+
+.account-btn, .cart-btn {
+    text-decoration: none;
+    color: #2B4B5C;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.account-btn i, .cart-btn i {
+    font-size: 1.2rem;
+}
+
+.account-btn:hover, .cart-btn:hover {
+    color: #1a3541;
+}
+
+/* Media queries pour le responsive */
+@media (max-width: 768px) {
+    .account-cart {
+        gap: 0.5rem;
+    }
+    
+    .account-btn, .cart-btn {
+        font-size: 0.85rem;
+    }
+    
+    .account-btn i, .cart-btn i {
+        font-size: 1rem;
+    }
+} 
