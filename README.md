@@ -41,3 +41,5 @@ Ce projet consiste à créer une plateforme e-commerce professionnelle pour les 
 
 ## Contact
 Pour toute question concernant ce projet, veuillez contacter l'équipe de développement chez Kerzh Pro.
+
+![logo](https://github.com/user-attachments/assets/f018d44c-3e6c-48ce-9c12-4367e462a775)
