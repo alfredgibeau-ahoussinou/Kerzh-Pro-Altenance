@@ -150,8 +150,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Données des catégories
     const categories = [
         { name: 'Fruits', image: 'images/fruits.png' },
-        { name: 'Légumes', image: 'images/epicerie-salee.png' },
-        { name: 'Épices', image: 'images/boissons.png' },
+        { name: 'Légumes', image: 'legumes.jpg' },
+        { name: 'Épices', image: 'epices.jpg' },
         { name: 'Bio', image: 'bio.jpg' },
         // Ajoutez d'autres catégories selon vos besoins
     ];
@@ -167,6 +167,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         `;
         categoryContainer.appendChild(circle);
     });
+
+    // Données des produits
+    const products = [
+        { name: 'Produit 1', price: '9.99€', image: 'product1.jpg' },
+        { name: 'Produit 2', price: '14.99€', image: 'product2.jpg' },
+        // Ajoutez d'autres produits selon vos besoins
+    ];
 
     // Création des cartes de produits
     const productsGrid = document.querySelector('.products-grid');
